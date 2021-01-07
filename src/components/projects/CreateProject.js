@@ -22,6 +22,8 @@ class CreateProject extends Component {
     // Log the State
     // console.log(this.state);
     this.props.createProject(this.state);
+    // Redirect
+    this.props.history.push("/");
   };
 
   // Render
