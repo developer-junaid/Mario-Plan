@@ -21,10 +21,16 @@ const store = createStore(
   applyMiddleware(thunk.withExtraArgument({ getFirebase }))
 );
 
+// RRF Config
+const rrfConfig = {
+  userProfile: "users",
+  useFirestoreForProfile: true,
+};
+
 // React Redux Firebase - Props
 const rrfProps = {
   firebase,
-  config: {}, // For setting up users,
+  config: rrfConfig, // For setting up users,
   dispatch: store.dispatch,
   createFirestoreInstance,
 };

@@ -3,7 +3,7 @@ import "firebase/firestore";
 import "firebase/auth";
 
 // Your web app's Firebase configuration
-var config = {
+export var config = {
   apiKey: "AIzaSyDtZtFNg7w_3tTjL_x8_MIGSL2rd_ZXBRg",
   authDomain: "developer-junaid-marioplan.firebaseapp.com",
   projectId: "developer-junaid-marioplan",
