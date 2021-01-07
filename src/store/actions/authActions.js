@@ -35,3 +35,38 @@ export const signOut = () => {
       });
   };
 };
+
+// Sign Out Action Creator
+export const signUp = (newUser) => {
+  return (dispatch, getState, { getFirebase }) => {
+    // Initialize Firebase
+    const firebase = getFirebase();
+    // Initialize Firestore
+    const firestore = firebase.firestore();
+
+    // Generate user
+    firebase
+      .auth()
+      .createUserWithEmailAndPassword(newUser.email, newUser.password)
+      .then((resp) => {
+        // Success
+        // Add Data to firestore collection 'users'
+        return firestore
+          .collection("users")
+          .doc(resp.user.uid)
+          .set({
+            firstName: newUser.firstName,
+            lastName: newUser.lastName,
+            initials: newUser.firstName[0] + newUser.lastName[0],
+          })
+          .then(() => {
+            // User and record created
+            dispatch({ type: "SIGNUP_SUCCESS" });
+          });
+      })
+      .catch((err) => {
+        // If something went wrong
+        dispatch({ type: "SIGNUP_ERROR", err });
+      });
+  };
+};
