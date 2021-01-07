@@ -1,5 +1,6 @@
 import React from "react";
 import ProjectSummary from "./ProjectSummary";
+import { Link } from "react-router-dom";
 
 const ProjectList = ({ projects }) => {
   return (
@@ -7,7 +8,9 @@ const ProjectList = ({ projects }) => {
       {/* If Projects are there, get projects */}
       {projects &&
         projects.map((project) => (
-          <ProjectSummary project={project} key={project.id} />
+          <Link key={project.id} to={"/project/" + project.id}>
+            <ProjectSummary project={project} />
+          </Link>
         ))}
     </div>
   );
