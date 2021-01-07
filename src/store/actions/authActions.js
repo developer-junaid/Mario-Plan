@@ -18,3 +18,20 @@ export const signIn = (credentials) => {
       });
   };
 };
+
+// Sign Out Action Creator
+export const signOut = () => {
+  return (dispatch, getState, { getFirebase }) => {
+    // Initialize firebase
+    const firebase = getFirebase();
+
+    // Sign Out
+    firebase
+      .auth()
+      .signOut()
+      .then(() => {
+        // Success
+        dispatch({ type: "SIGNOUT_SUCCESS" });
+      });
+  };
+};
