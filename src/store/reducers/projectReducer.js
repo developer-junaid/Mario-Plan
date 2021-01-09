@@ -20,9 +20,19 @@ const projectReducer = (state = initialState, action) => {
     // If Error occurs
     case "CREATE_PROJECT_ERROR":
       console.log("create project error", action.err);
+      return state;
+
+    // If Create Project
+    case "CREATE_NOTIFICATION":
+      console.log("created notification", action.notification);
+      return state;
+
+    // If Error occurs
+    case "CREATE_NOTIFICATION_ERROR":
+      console.log("create notification error", action.err);
+      return state;
 
     // If something else occurs
-    // eslint-disable-next-line no-fallthrough
     default:
       return state;
   }

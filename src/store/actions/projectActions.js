@@ -1,3 +1,21 @@
+const createNotification = (firestore, notification, dispatch) => {
+  firestore
+    .collection("notifications")
+    .add(notification)
+    .then(() => {
+      // Notification success
+      dispatch({
+        type: "CREATE_NOTIFICATION",
+        notification,
+      });
+    })
+    .catch((err) => {
+      // Dispatch the Error Action
+      dispatch({ type: "CREATE_NOTIFICATION_ERROR", err });
+    });
+};
+
+// Create project
 export const createProject = (project) => {
   return (dispatch, getState, { getFirebase }) => {
     // Make async call to database
@@ -18,7 +36,19 @@ export const createProject = (project) => {
       })
       .then(() => {
         // Dispatch Create Project Action
-        dispatch({ type: "CREATE_PROJECT", project });
+        dispatch({
+          type: "CREATE_PROJECT",
+          project,
+        });
+
+        // // Create Notification
+        const notification = {
+          content: "Added a new project",
+          user: `${profile.firstName} ${profile.lastName}`,
+          time: new Date(),
+        };
+
+        createNotification(firestore, notification, dispatch);
       })
       .catch((err) => {
         // Dispatch the Error Action
