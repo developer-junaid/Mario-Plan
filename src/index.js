@@ -14,6 +14,7 @@ import {
 } from "react-redux-firebase";
 import firebase from "./config/fbConfig";
 import { createFirestoreInstance } from "redux-firestore";
+import { Spinner } from "react-bootstrap";
 
 // Create Store Apply thunk
 const store = createStore(
@@ -38,7 +39,13 @@ const rrfProps = {
 // Auth Is Loaded function
 function AuthIsLoaded({ children }) {
   const auth = useSelector((state) => state.firebase.auth);
-  if (!isLoaded(auth)) return <div>splash screen...</div>;
+  if (!isLoaded(auth)) {
+    return (
+      <div className="spinner-container">
+        <Spinner animation="grow" variant="dark" className="spinner-item" />
+      </div>
+    );
+  }
   return children;
 }
 
