@@ -3,7 +3,7 @@
 
 ### On Computer Screen
 
-<img src="./project_images/marioplanPC.png"/>
+<img src="./projectImages/marioplanPC.png"/>
 
 ### link : https://developer-junaid-marioplan.web.app/
 
