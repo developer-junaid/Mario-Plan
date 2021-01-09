@@ -1,3 +1,5 @@
+import { createNotification } from "./functions/functions";
+
 // Sign In Action Creator
 export const signIn = (credentials) => {
   return (dispatch, getState, { getFirebase }) => {
@@ -62,6 +64,15 @@ export const signUp = (newUser) => {
           .then(() => {
             // User and record created
             dispatch({ type: "SIGNUP_SUCCESS" });
+
+            // Add Notification for user joined
+            const notification = {
+              content: "Joined the party",
+              user: `${newUser.firstName} ${newUser.lastName}`,
+              time: new Date(),
+            };
+
+            createNotification(firestore, notification, dispatch);
           });
       })
       .catch((err) => {
